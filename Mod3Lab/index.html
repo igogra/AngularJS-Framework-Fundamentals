@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <title>Tony's Pizza</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body ng-controller="pizzaController">
+    <div class="container">
+        <h1>Tony's Pizza</h1>
+        <h2>{{model.title}}</h2>
+        <h3>Topping Search</h3>
+        <input type="text" class="form-control" ng-model="model.search">
+        <div ng-show="model.toppingAdded" class="alert alert-success">Topping added.
+            <button ng-click="model.toppingAdded=false">Close</button>
+        </div>
+        <div ng-show="model.search.length>0 && filteredToppings.length===0" class="alert alert-danger">No results.</div>
+        <div ng-hide="model.search">
+            Enter the search criteria above
+        </div>
+        <div ng-show="model.search" ng-repeat="topping in filteredToppings = (model.availableToppings | filter:model.search)">
+            <span ng-click="addTopping(topping)">{{topping}}</span>
+        </div>
+        <h3 ng-show="model.toppings">Selected Toppings</h3>
+        <div ng-repeat="topping in model.toppings">
+            {{topping}}
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/pizzaController.js"></script>
+</body>
+
+</html>
