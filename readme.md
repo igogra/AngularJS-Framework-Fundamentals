@@ -1,6 +1,6 @@
 #AngularJS: Framework Fundamentals
 
-edX MOOC from Microsoft. Solutions of the self-assesment labs. Course for anyone wanting to learn the basics of working with the Angular framework who already has some HTML, CSS, and JavaScript training or knowledge.
+Solutions to the self-assesment labs for the "AngularJS Framework Fundamentals" edX MOOC taught by Microsoft.
 
 ##Course Outline
 
