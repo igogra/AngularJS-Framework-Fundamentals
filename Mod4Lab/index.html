@@ -42,7 +42,7 @@
                     </td>
                 </tr>
             </table>
-            <div ng-show="model.alert" class="alert alert-danger">No results</div>
+            <div ng-show="model.alertRepos" class="alert alert-danger">{{model.alertRepos}}</div>
         </div>
         <div class="col-md-5" ng-show="model.detail">
             <h3>Detail</h3>
@@ -61,6 +61,7 @@
             <h4>Raw Data</h4>
             <pre>{{model.detail | json}}</pre>
         </div>
+        <div class="col-md-5" ng-show="model.alertDetail" class="alert alert-danger">{{model.alertDetail}}</div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-resource.min.js"></script>

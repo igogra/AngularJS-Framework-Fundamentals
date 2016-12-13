@@ -25,14 +25,19 @@ app.controller('labController', ['$scope', '$timeout', '$q', '$http', 'gitHub', 
         $http.get('https://api.github.com/orgs/' + search + '/repos').then(function(response) {
             $scope.model.repos = gitHub.getAll({ org: search });
         }, function(response) {
-            $scope.model.alert = 'Error: ' + response.data.message;
+            $scope.model.alertRepos = 'Error: ' + response.data.message;
         });
 
     }
 
     function loadDetail(search, name) {
         $scope.model.detail = null;
-        $scope.model.detail = gitHub.getDetail({ org: search, id: name });
+
+        $http.get('https://api.github.com/repos/' + search + '/' + name).then(function(response) {
+            $scope.model.detail = gitHub.getDetail({ org: search, id: name });
+        }, function(response) {
+            $scope.model.alertDetail = 'Error: ' + response.data.message;
+        });
     }
 
     function checkOddNumberHandler(input) {
