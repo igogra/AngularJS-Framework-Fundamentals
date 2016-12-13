@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Promises, HTTP and Resources</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-controller="labController">
+    <div class="container">
+        <h1>Promises, HTTP and Resources</h1>
+        <input type="number" ng-model="model.number" class="form-control" style="margin-bottom: 10px;" />
+        <input type="button" class="btn btn-primary" value="Check Odd Number" ng-click="checkOddNumber(model.number)" style="margin-bottom: 10px;" />
+        <pre>{{model.result}}</pre>
+        <div style="margin-top: 30px;">
+            <input type="text" ng-model="model.search" class="form-control" style="margin-bottom: 10px;" />
+            <input type="button" class="btn btn-primary" value="Load Repos" ng-click="getRepos(model.search)" />
+        </div>
+        <div class="col-md-6" style="margin-top: 10px;">
+            <table class="table table-striped" ng-show="model.repos">
+                <tr>
+                    <th>Name</th>
+                    <th>Language</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="r in model.repos">
+                    <td>
+                        <h4>{{r.name}}</h4> {{r.description}}
+                    </td>
+                    <td>{{r.language}}</td>
+                    <td>
+                        <input type="button" class="btn btn-success" ng-click="loadDetail(model.search, r.name)" value="Detail">
+                    </td>
+                </tr>
+            </table>
+            <div ng-show="model.alert" class="alert alert-danger">No results</div>
+        </div>
+        <div class="col-md-5" ng-show="model.detail">
+            <h3>Detail</h3>
+            <div ng-show="model.detail.error" class="alert alert-danger">
+                <h3>Error</h3> {{model.detail.message}}</div>
+            <div>
+                <h4>Name</h4> {{model.detail.name}}
+            </div>
+            <div>
+                <h4>Description</h4> {{model.detail.description}}
+            </div>
+            <div>
+                <h4>URL</h4>
+                <a ng-href="{{model.detail.html_url}}" target="_blank">{{model.detail.html_url}}</a>
+            </div>
+            <h4>Raw Data</h4>
+            <pre>{{model.detail | json}}</pre>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-resource.min.js"></script>
+    <script src="app/gitHubService.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/labController.js"></script>
+</body>
+
+</html>
