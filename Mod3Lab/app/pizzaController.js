@@ -6,7 +6,10 @@ app.controller('pizzaController', ['$scope', function($scope) {
     };
 
     $scope.addTopping = function(topping) {
+        var toppingIndex = $scope.model.availableToppings.indexOf(topping);
+
         $scope.model.toppings.push(topping);
+        $scope.model.availableToppings.splice(toppingIndex, 1);
         $scope.model.search = null;
         $scope.model.toppingAdded = true;
     };
